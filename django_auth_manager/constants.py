@@ -1,0 +1,2 @@
+INDENT = "  "
+DEFAULT_LENGTH = 30
