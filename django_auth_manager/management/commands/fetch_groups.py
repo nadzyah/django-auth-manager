@@ -53,11 +53,11 @@ class Command(BaseCommand):
         permissions for this group, and users in it
         """
         if group_name:
-            all_groups = Group.objects.prefetch_related("user_set", "permissions").filter(name=group_name)
+            all_groups = Group.objects.prefetch_related(
+                "user_set", "permissions"
+            ).filter(name=group_name)
             if not all_groups.exists():
-                self.stderr.write(
-                    self.style.ERROR(f"Group {group_name} is not found")
-                )
+                self.stderr.write(self.style.ERROR(f"Group {group_name} is not found"))
                 sys.exit(1)
         else:
             all_groups = Group.objects.prefetch_related("user_set", "permissions").all()

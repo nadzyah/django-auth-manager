@@ -1,9 +1,43 @@
+[project]
+name = "django-auth-manager"
+version = "0.1.0"
+description = "Django extension for managing users and groups"
+authors = [
+  { name="Nadzeya H", email="nadzya.info@gmail.com" },
+]
+license = { text="MIT license" }
+readme = "README.md"
+classifiers = [
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 2.2",
+    "Framework :: Django :: 3.2",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.0",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10"
+]
+
+[project.urls]
+Homepage = "https://github.com/nadzyah/django-auth-manager"
+Issues = "https://github.com/nadzyah/django-auth-manager/issues"
+Repository = "https://github.com/nadzyah/django-auth-manager"
+
+[tool.black]
+line-length = 89
+
 [tool.poetry]
 name = "django-auth-manager"
 version = "0.1.0"
 description = "Django extension for managing users and groups"
-authors = ["Nadzeya Hutsko <nadzya.info@gmail.com>"]
-license = "MIT"
+authors = ["Nadzeya H <nadzya.info@gmail.com>"]
+license = "MIT license"
 readme = "README.md"
 
 [tool.poetry.dependencies]

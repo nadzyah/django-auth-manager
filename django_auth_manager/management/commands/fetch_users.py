@@ -6,9 +6,7 @@ from django_auth_manager.constants import INDENT
 
 
 class Command(BaseCommand):
-    help = (
-        "List all users and their permissions, including those inherited from groups."
-    )
+    help = "List all users and their permissions, including those inherited from groups."
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -43,9 +41,7 @@ class Command(BaseCommand):
                     self.style.SUCCESS(f"User: {user.username} ({user.email})")
                 )
             else:
-                self.stdout.write(
-                    self.style.SUCCESS(f"User: {user.username}")
-                )
+                self.stdout.write(self.style.SUCCESS(f"User: {user.username}"))
             if user.is_superuser:
                 self.stdout.write(self.style.WARNING(f"{INDENT}This is a superuser."))
                 self.stdout.write(
