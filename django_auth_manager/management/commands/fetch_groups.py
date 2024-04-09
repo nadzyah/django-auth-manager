@@ -64,25 +64,20 @@ class Command(BaseCommand):
 
         groups_data = []
         for group in all_groups:
-            # Prepare data dictionary for each group
-            group_data = {
                 "name": group.name,
                 "permissions": [],
                 "users": [],
             }
 
-            # Add users to the group data
             for user in group.user_set.all():
                 if user.email:
                     group_data["users"].append(f"{user.username} ({user.email})")
                 else:
                     group_data["users"].append(f"{user.username}")
 
-            # Add permissions to the group data
             for permission in group.permissions.all():
                 group_data["permissions"].append(permission.codename)
 
-            # Add the group's data to the list
             groups_data.append(group_data)
         return groups_data
 
@@ -113,18 +108,16 @@ class Command(BaseCommand):
             else DEFAULT_LENGTH
         )
 
-        # Total width for the delimiter line
         total_width = (
             max_group_name_length + max_user_length + max_permission_length + 6
         )  # 6 for pipes and spaces
 
         # Print header with dynamic spacing
         self.stdout.write(
-            f"{'Group':<{max_group_name_length}} | {'User':<{max_user_length}} | {'Permission':<{max_permission_length}}"
+            f"{'Group':<{max_group_name_length}} | {'Users':<{max_user_length}} | {'Permissions':<{max_permission_length}}"
         )
         self.stdout.write("-" * total_width)
 
-        # Iterate through each group
         for group in groups_data:
             self.stdout.write(f"{group['name']:<{max_group_name_length}} | ", ending="")
             if group["users"]:
