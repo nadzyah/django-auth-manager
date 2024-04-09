@@ -2,7 +2,7 @@ import sys
 import yaml
 from itertools import zip_longest
 
-from django.contrib.auth.models import User, Group, Permission
+from django.contrib.auth.models import Group
 from django.core.management.base import BaseCommand
 
 from django_auth_manager.constants import DEFAULT_LENGTH
@@ -12,6 +12,13 @@ class Command(BaseCommand):
     help = "List all groups, users in them and the permissions in these groups"
 
     def add_arguments(self, parser):
+        parser.add_argument(
+            "-g",
+            "--group",
+            dest="group_name",
+            required=False,
+            help="Specify group name to retrieve information for a specific group",
+        )
         parser.add_argument(
             "--yaml",
             action="store_true",
@@ -26,7 +33,7 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        groups_data = self._get_groups_list()
+        groups_data = self._get_groups_list(options["group_name"])
         if options["yaml"]:
             self.stdout.write(yaml.dump(groups_data))
         elif options["table"]:
@@ -40,14 +47,22 @@ class Command(BaseCommand):
             )
             sys.exit(1)
 
-    def _get_groups_list(self):
+    def _get_groups_list(self, group_name):
         """
         Return a list of dicts that represent groups. Each dict contains of a group name,
         permissions for this group, and users in it
         """
-        groups_data = []
-        all_groups = Group.objects.prefetch_related("user_set", "permissions").all()
+        if group_name:
+            all_groups = Group.objects.prefetch_related("user_set", "permissions").filter(name=group_name)
+            if not all_groups.exists():
+                self.stderr.write(
+                    self.style.ERROR(f"Group {group_name} is not found")
+                )
+                sys.exit(1)
+        else:
+            all_groups = Group.objects.prefetch_related("user_set", "permissions").all()
 
+        groups_data = []
         for group in all_groups:
             # Prepare data dictionary for each group
             group_data = {

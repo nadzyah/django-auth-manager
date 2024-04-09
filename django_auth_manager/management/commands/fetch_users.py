@@ -21,9 +21,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         if options["username"]:
-            try:
-                users = [User.objects.get(username=options["username"])]
-            except User.DoesNotExist:
+            users = User.objects.filter(username=options["username"])
+            if not users.exists():
                 self.stderr.write(
                     self.style.ERROR(f"User {options['username']} is not found")
                 )
@@ -39,9 +38,14 @@ class Command(BaseCommand):
 
             permissions = set(direct_permissions) | set(group_permissions)
 
-            self.stdout.write(
-                self.style.SUCCESS(f"User: {user.username} ({user.email})")
-            )
+            if user.email:
+                self.stdout.write(
+                    self.style.SUCCESS(f"User: {user.username} ({user.email})")
+                )
+            else:
+                self.stdout.write(
+                    self.style.SUCCESS(f"User: {user.username}")
+                )
             if user.is_superuser:
                 self.stdout.write(self.style.WARNING(f"{INDENT}This is a superuser."))
                 self.stdout.write(
