@@ -1,6 +1,6 @@
 [project]
 name = "django-auth-manager"
-version = "0.1.0"
+version = "0.1.1"
 description = "Django extension for managing users and groups"
 authors = [
   { name="Nadzeya H", email="nadzya.info@gmail.com" },
@@ -25,16 +25,15 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/nadzyah/django-auth-manager"
-Issues = "https://github.com/nadzyah/django-auth-manager/issues"
-Repository = "https://github.com/nadzyah/django-auth-manager"
+"Homepage" = "https://github.com/nadzyah/django-auth-manager"
+"Bug Tracker" = "https://github.com/nadzyah/django-auth-manager/issues"
 
 [tool.black]
 line-length = 89
 
 [tool.poetry]
 name = "django-auth-manager"
-version = "0.1.0"
+version = "0.1.1"
 description = "Django extension for managing users and groups"
 authors = ["Nadzeya H <nadzya.info@gmail.com>"]
 license = "MIT license"

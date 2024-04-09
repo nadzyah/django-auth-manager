@@ -20,7 +20,7 @@ INSTALLED_APPS += ["django_auth_manager"]
 
 This extension provides you with additional `manage.py` commands. The information below describes how to use them.
 
-## Fetch All Users and Their Permissions
+### Fetch All Users and Their Permissions
 
 The `fetch_users` script outputs the information about a user and their permissions. Here is an example for getting information for all the users:
 
@@ -79,7 +79,7 @@ User: testuser
 ```
 
 
-## Fetch Information About Groups
+### Fetch Information About Groups
 
 The `fetch_groups` command outputs all the groups, users in these groups, and the group permissions for each group. You can output the data in either YAML or table format:
 
